@@ -11,10 +11,20 @@ block content
                 div.row
                     div.col-xl-12
                         h1.text-center.text-primary Badania Przesiewowe  
+                                div.row
+                    div.col-xl-12
+                        - var inputDateClasses = ["form-control"]
+                        label.text-secondary Imię i nazwisko
+                        br
+                        input(class=inputDateClasses required autofocus name="name" type="text" placeholder="Imię i nazwisko")
+                        br
+                        label.text-secondary Data urodzenia (ROK-MIESIĄC-DZIEŃ)
+                        br
+                        input(name="date" id="dateInput" required class=inputDateClasses type="text" placeholder="YYYY-MM-DD" onChange="countAge()")
                 div.row
                     div.col-xl-12
-                        h6.text-center.text-info Aktualnie badane dziecko: #{name}.
-                        input(type="hidden" name="name" value=name)
+                        //- h6.text-center.text-info Aktualnie badane dziecko: #{name}.
+                        //- input(type="hidden" name="name" value=name)
                         input( type="hidden" name="age" value="age6")           
                 div.row
                     div.col-xl-12
@@ -31,7 +41,7 @@ block content
                 div.row
                     div.col-xl-12
                         p.text-center.text-danger(id="age") Wiek: #{date}
-                        input(type="hidden" name="date" value=date)                       
+                        //- input(type="hidden" name="date" value=date)                       
                 div.row
                     div.col-xl-6
                         h5.text-secondary.text-center Analiza

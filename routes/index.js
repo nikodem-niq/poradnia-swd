@@ -22,16 +22,30 @@ router.get('/', function(req, res, next) {
   }
 });
 
-router.post('/report', (req,res,next) => {
-  let date = req.body.date;
-  let name = req.body.name;
-  let age = countAge(date)
-  if(countAge(date)[0] >= 7){
-    res.render('age7.pug', {name: name, date:age});
-  }else{
-    res.render("age6.pug", {name:name, date:age});
+// router.post('/report', (req,res,next) => {
+//   let date = req.body.date;
+//   let name = req.body.name;
+//   let age = countAge(date)
+//   if(countAge(date)[0] >= 7){
+//     res.render('age7.pug', {name: name, date:age});
+//   }else{
+//     res.render("age6.pug", {name:name, date:age});
+//   }
+// })
+
+router.get('/age6', (req,res,next) => {
+  if(req.cookies["userData"]){
+    res.render('age6.pug'); 
   }
 })
+
+router.get('/age7', (req,res,next) => {
+  if(req.cookies["userData"]){
+    res.render('age7.pug'); 
+  }
+})
+
+
 
 router.get('/logout', (req,res,next) => {
   if(req.cookies["userData"]) {
@@ -43,6 +57,8 @@ router.get('/logout', (req,res,next) => {
 })
 
 router.post('/send', (req,res,next) => {
+
+  
   let analiza = 0;
   analiza += parseInt(req.body.ana);
 
@@ -259,7 +275,8 @@ router.post('/send', (req,res,next) => {
       res.redirect('/?sent=true');
     });   
   }
-  sendMail();
+  // sendMail();
+  console.log(formData)
 });
 
 module.exports = router;

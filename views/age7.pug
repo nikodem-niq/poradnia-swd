@@ -11,6 +11,16 @@ block content
                 div.row
                     div.col-xl-12
                         h1.text-center.text-primary Badania Przesiewowe
+                                div.row
+                    div.col-xl-12
+                        - var inputDateClasses = ["form-control"]
+                        label.text-secondary Imię i nazwisko
+                        br
+                        input(class=inputDateClasses required autofocus name="name" type="text" placeholder="Imię i nazwisko")
+                        br
+                        label.text-secondary Data urodzenia (ROK-MIESIĄC-DZIEŃ)
+                        br
+                        input(name="date" id="dateInput" required class=inputDateClasses type="text" placeholder="YYYY-MM-DD" onChange="countAge()")
                 div.row
                     div.col-xl-12
                         h3.text-center.text-primary Lateralizacja
