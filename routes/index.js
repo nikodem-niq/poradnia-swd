@@ -134,7 +134,8 @@ const pdfData = () => {
     
 
       console.log('Message sent: %s', info.messageId);
-      res.render("report.pug", {sent:true, kids:readNamesFromFile()});
+      res.redirect('/')
+      //res.render("report.pug", {sent:true, kids:readNamesFromFile()});
     });   
   }
   sendMail();
