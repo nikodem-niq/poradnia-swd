@@ -1,0 +1,45 @@
+extends layout
+
+block content
+    head 
+        script(type="text/javascript" src="../scripts/reportDate.js")
+        script(type="text/javascript" src="https://momentjs.com/downloads/moment.js")
+    div.container
+        form(action="/report" method="POST")
+            div.jumbotron.text-center
+                #sent
+                    if sent
+                        h4.text-danger Informacja
+                        p.text-danger.success__raport Raport został poprawnie wygenerowany i przesłany na maila.
+                        
+                div.row
+                    div.col-xl-12
+                        h1.text-center.text-primary Badania Przesiewowe
+                div.row
+                    div.col-xl-12
+                        - var inputDateClasses = ["form-control"]
+                        label.text-secondary Imię i nazwisko
+                        br
+                        input(class=inputDateClasses required autofocus name="name" type="text" placeholder="Imię i nazwisko")
+                        br
+                        label.text-secondary Data urodzenia (ROK-MIESIĄC-DZIEŃ)
+                        br
+                        input(name="date" id="dateInput" required class=inputDateClasses type="text" placeholder="YYYY-MM-DD" onChange="countAge()")
+                div.row
+                    div.col-xl-12.text-center
+                        input.buttons.btn.btn-success(type="submit" value="Przejdz dalej")
+
+        form(action="/logout")
+            input.logout.btn.btn-danger(type="submit" value="Wyloguj")
+        //.col-xl-6.restart
+            .row
+                form(action="/restart")
+                    label.text-secondary Uzywać tylko w nagłych przypadkach!
+                    input.btn.btn-danger(type="submit" value="Restart aplikacji")
+                
+
+                    
+
+                        
+
+                    

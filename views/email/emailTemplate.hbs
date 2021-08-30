@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <style type="text/css">
+    .bold {
+      font-weight: 900 !important;
+    }
+
+    .tg {
+      border-collapse: collapse;
+      border-spacing: 0;
+    }
+
+    .tg td {
+      font-family: Arial, sans-serif;
+      font-size: 11px;
+      padding: 10px 5px;
+      border-width: 1px;
+      overflow: hidden;
+      word-break: normal;
+    }
+
+    table,
+    .tg,
+    td,
+    th {
+      border: solid 3.5px black;
+    }
+
+    .tg th {
+      font-family: Arial, sans-serif;
+      font-size: 11px;
+      font-weight: normal;
+      padding: 5px 2px;
+      border-style: solid;
+      border-width: 1px;
+      overflow: hidden;
+      word-break: normal;
+      border-color: black;
+    }
+
+    .tg .tg-0lax {
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .table-cell {
+       border-top: 0px !important;
+       border-bottom: 0px !important;
+    }
+
+    .auto {
+      width: 100%;
+      margin-right: 20%;
+    }
+
+  </style>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="container">
+    <row>
+      <div style="text-align:center;" class="text-center">
+        <p class="">
+            <span class="bold"> Poradnia Psychologiczno – Pedagogiczna w Wodzisławiu Śl. </span>
+          <br>
+            ul. Mendego 3; 44-300 Wodzisław Śl. tel./fax (32) 456 19 93;
+            <br>
+            e-mail: ppp-wodzislaw@wp.pl  www.poradnia.wodzislaw.pl
+        </p>
+      </div>
+    </row>
+  </div>
+  <table class="tg" width="842">
+    <th class="tg-0lax bold" rowspan="2">Imię i nazwisko</th>
+    <th class="tg-0lax bold table-cell" rowspan="1">Wiek <br> życia</th>
+    <th class="tg-0lax bold" rowspan="2">Lateralizacja</th>
+    <th class="tg-0lax bold" colspan="3">FUNKCJE SŁUCHOWE</th>
+    <th class="tg-0lax bold" colspan="2">FUNKCJE WZROKOWO-PRZESTRZENNE</th>
+    <th class="tg-0lax bold" rowspan="2">Wymowa</th>
+    </tr>
+    <tr>
+      <th class="tg-0lax bold table-cell"></th> 
+      <th class="tg-0lax bold">Analiza fonemowa</th>
+      <th class="tg-0lax bold">Synteza fonemowa</th>
+      <th class="tg-0lax bold">Pamięć słuchowa</th>
+      <th class="tg-0lax bold" colspan="2">Percepcja wzrokowa, przestrzenna oraz integracja wzrokowo-przestrzenna</th>
+    </tr>
+    <tr>
+      <th class="tg-0lax">{{formData.name}}</th>
+      <th class="tg-0lax">{{formData.date}}</th>
+      <th class="tg-0lax">{{formData.lat}}</th>
+      <td class="tg-0lax">{{formData.analiza}}</td>
+      <td class="tg-0lax">{{formData.synteza}}</td>
+      <td class="tg-0lax">{{formData.pamiecSluchowa}}</td>
+      <td class="tg-0lax" colspan="2">{{formData.shapesSix}}</td>
+      <td class="tg-0lax" rowspan="1">{{formData.artykulacja}}</td>
+    </tr>
+    <tr>
+      <td class="tg-0lax" colspan="9"><span class="bold">Uwagi:</span> {{formData.uwagi}}</td>
+    </tr>
+  </table>
+</body>
+
+</html>
