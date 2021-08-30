@@ -27,14 +27,6 @@ function countPoints(){
 }
 
 function countAnaliza(){
-    // let an1 = parseInt(document.getElementsByName("an1")[0].value)
-    // let an2 = parseInt(document.getElementsByName("an2")[0].value)
-    // let an3 = parseInt(document.getElementsByName("an3")[0].value)
-    // let an4 = parseInt(document.getElementsByName("an4")[0].value)
-    // let an5 = parseInt(document.getElementsByName("an5")[0].value)
-    // let an6 = parseInt(document.getElementsByName("an6")[0].value)
-    // let an7 = parseInt(document.getElementsByName("an7")[0].value)
-    // let an8 = parseInt(document.getElementsByName("an8")[0].value)
     let p = document.getElementById("wynikAnaliza")
     let analiza = parseInt(document.getElementsByName("ana")[0].value);
     let _analiza = ""

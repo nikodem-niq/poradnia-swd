@@ -6,7 +6,7 @@ block content
         script(type="text/javascript" src="https://momentjs.com/downloads/moment.js")
         script(type="text/javascript" src="../scripts/age7.js")
     div.container
-        form(action="/send" method="POST")
+        form(action="/add_student" method="POST")
             div.jumbotron
                 div.row
                     div.col-xl-12
@@ -33,9 +33,9 @@ block content
 
                 div.row
                     div.col-xl-12
-                        h6.text-center.text-info Aktualnie badane dziecko: #{name}.
-                        input( type="hidden" name="name" value=name)  
-                        input( type="hidden" name="lat" value=lat)     
+                        //- h6.text-center.text-info Aktualnie badane dziecko: #{name}.
+                        //- input( type="hidden" name="name" value=name)  
+                        //- input( type="hidden" name="lat" value=lat)     
                         input( type="hidden" name="age" value="age7")                                                                                                                                     
                 div.row
                     div.col-xl-12
@@ -340,22 +340,7 @@ block content
                 .row
                     .col-xl-12
                         textarea.form-control#uwagi(name="uwagi", rows="4")
-                .row
-                    .col-xl-12
-                        h4.text-primary.text-center Wyślij do
-                div.row
-                    div.col
-                        .text-center
-                            label.text-info Barbara
-                            input.btn.btn-success(type="submit" name="genreport" value="poradnia_badania1@interia.pl")
-                    .col
-                        .text-center
-                            label.text-info Aleksandra
-                            input.btn.btn-success(type="submit" name="genreport" value="poradnia_badania2@interia.pl")
-                    .col
-                        .text-center
-                            label.text-info Judyta
-                            input.btn.btn-success(type="submit" name="genreport" value="poradnia_badania3@interia.pl")
+                        input.btn.btn-success.btn-block(type="submit" value="Dodaj ucznia do listy")
         form(action="/")
             input.back.btn.btn-danger(type="submit" value="Wstecz")
         form(action="/logout")

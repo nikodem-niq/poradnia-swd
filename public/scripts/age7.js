@@ -45,18 +45,6 @@ function dodajUwage(uwaga){
     uwagiTextBox.value += uwaga
 }
 
-// function countPamiecSluchowa(){
-//     let zestaw1value = parseInt(document.getElementById("zestaw1").value)
-//     // let zestaw2value = parseInt(document.getElementById("zestaw2").value)
-//     // let zestaw3value = parseInt(document.getElementById("zestaw3").value)
-//     // let zestaw4value = parseInt(document.getElementById("zestaw4").value)
-
-//     let sumaPamiecSluchowa = document.getElementById("sumPamiecSluchowa")
-//     if (zestaw1value != "-1"){
-//       sumaPamiecSluchowa.value = zestaw1value;
-//     }
-// }
-
 function countAnaliza(){
     let p = document.getElementById("wynikAnaliza")
     let analiza = parseInt(document.getElementsByName("ana")[0].value)

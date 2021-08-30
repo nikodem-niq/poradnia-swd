@@ -13,25 +13,14 @@ let Handlebars = require('handlebars');
 router.get('/', function(req, res, next) {
   if(req.cookies["userData"]) {
     if(req.query.sent == 'true') {
-      res.render("report.pug", {sent:true});
+      res.render("report.pug", {sent:true, kids:readNamesFromFile()});
     } else {
-      res.render("report.pug", {sent:false});
+      res.render("report.pug", {sent:false, kids:readNamesFromFile()});
     }
   } else {
     res.render('index.pug', { error: false });
   }
 });
-
-// router.post('/report', (req,res,next) => {
-//   let date = req.body.date;
-//   let name = req.body.name;
-//   let age = countAge(date)
-//   if(countAge(date)[0] >= 7){
-//     res.render('age7.pug', {name: name, date:age});
-//   }else{
-//     res.render("age6.pug", {name:name, date:age});
-//   }
-// })
 
 router.get('/age6', (req,res,next) => {
   if(req.cookies["userData"]){
@@ -56,9 +45,103 @@ router.get('/logout', (req,res,next) => {
   }
 })
 
+const readNamesFromFile = () =>{
+  data = fs.readFileSync('raporty/names.txt', 'utf8')
+  names = data.toString().split('\n')
+  return names //imiona i nazwiska z pliku
+}
+
+const addNameToFile = (name) => {
+  fs.appendFileSync('raporty/names.txt', name + '\n', function(err){
+    if (err) throw err;
+  });
+}
+
+const clearFile = () => {
+  fs.writeFileSync('raporty/names.txt', '', function(err){
+    if (err) throw err;
+  });
+}
+
+const clearReportsDir = () => {
+  fs.readdir('raporty/pdf/', (err,files) => {
+    for(const file in files) {
+      fs.unlink(`raporty/pdf/${file}`);
+    }
+  });
+}
+
+
 router.post('/send', (req,res,next) => {
+  
+  let date = new Date().toDateString()
+  const [, month, day, year] = date.split(' ')
+  const ddMmYYYY = [day, month, year].join('-')
+
+  let time = new Date().toLocaleTimeString()
+  const [hour, min, sec] = time.split(':')
+  const hhSS = [hour, min].join(':')
+
+  let datetimeString = ddMmYYYY + ' ' + hhSS
+  
+  const transport = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: process.env.SENDER_EMAIL,
+      pass: process.env.SENDER_PASS
+    }
+  })
+
+const pdfData = () => {
+  let files = fs.readdirSync('raporty/pdf/')
+  let attachments = []
+  for(const file in files) {
+    let pdf = {
+      filename: `${slugify(files[file])}`,
+      path: `raporty/pdf/${slugify(files[file])}`,
+      contentType: 'application/pdf'
+    }
+    attachments.push(pdf);
+  }
+  return attachments
+}
+
+
+  const mailOptions = {
+      from: process.env.SENDER_EMAIL,
+      to: req.body.genreport,
+      subject: "Badania Przesiewowe "+datetimeString,
+      attachments: pdfData(),
+    };
 
   
+    
+
+  const sendMail = () => {
+    transport.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        return console.log(error);
+      }
+
+      fs.readdir('raporty/pdf/', (err,files) => {
+        for(const file in files) {
+          fs.unlink(`raporty/pdf/${files[file]}`, err => {
+            console.log(err);
+          });
+        }
+        clearFile();
+      });
+    
+
+      console.log('Message sent: %s', info.messageId);
+      res.render("report.pug", {sent:true, kids:readNamesFromFile()});
+    });   
+  }
+  sendMail();
+})
+
+router.post('/add_student', (req,res,next) => {
+
   let analiza = 0;
   analiza += parseInt(req.body.ana);
 
@@ -74,13 +157,15 @@ router.post('/send', (req,res,next) => {
   let artykulacja = req.body.artykulacja;
   let age = req.body.date;
   
+
   const parseData = () => {
     let _analiza;
     let _synteza;
     let _artykulacja;
     let _pamiecSluchowa;
     
-    let years = age.slice(1).split(",")[0]
+    let years = countAge(age)[0]
+    console.log(years)
 
     if(years < 7){
       if(analiza < 1) {
@@ -142,7 +227,7 @@ router.post('/send', (req,res,next) => {
       }
     }
 
-// -------------- CZESC WSPÓLNA
+ // -------------- CZESC WSPÓLNA
     if(artykulacja == "0"){
       _artykulacja = "do konsultacji logopedycznej"
     }
@@ -200,8 +285,8 @@ router.post('/send', (req,res,next) => {
 
   const formatDate = () => {
     let date = req.body.date;
-    let formatedDate_ = date.slice(1, -1);
-    return formatedDate_;
+    let years = `${countAge(date)[0]},${countAge(date)[1]}`
+    return years;
   }
 
   const formData = {
@@ -217,25 +302,6 @@ router.post('/send', (req,res,next) => {
     mailTo : req.body.genreport 
   }
 
-  const transport = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-      user: process.env.SENDER_EMAIL,
-      pass: process.env.SENDER_PASS
-    }
-  })
-  
-  const handlebarOptions = {
-    viewEngine: {
-      extName: '.hbs',
-      partialsDir: 'views/email',
-      layoutsDir: 'views/email',
-      defaultLayout: 'emailTemplate.hbs',
-    },
-    viewPath: 'views/email',
-    extName: '.hbs',
-  };
-  
   let source = fs.readFileSync("views/email/emailTemplate.hbs", "utf8")
   let template = Handlebars.compile(source)
   let html = template({formData})
@@ -248,35 +314,14 @@ router.post('/send', (req,res,next) => {
 
   function createPDF(){
     return new Promise(resolve =>{
-        pdf.create(html, pdfOptions).toFile(`raporty/${slugify(formData.name)}.pdf`, function(err, res){resolve("resolved")});
+        pdf.create(html, pdfOptions).toFile(`raporty/pdf/${slugify(formData.name)}.pdf`, function(err, res){resolve("resolved")});
     })
+  }
 
-  }
-  
-  const mailOptions = {
-      from: process.env.SENDER_EMAIL,
-      to: 'nikodemniq@gmail.com',
-      subject: "Badania Przesiewowe: " + formData.name,
-      attachments: [{
-        filename: `${slugify(formData.name)}.pdf`,
-        path: `raporty/${slugify(formData.name)}.pdf`,
-        contentType: 'application/pdf'
-      }],
-    };
-    
-  
-  async function sendMail(){
-    await createPDF()
-    transport.sendMail(mailOptions, (error, info) => {
-      if (error) {
-        return console.log(error);
-      }
-      console.log('Message sent: %s', info.messageId);
-      res.redirect('/?sent=true');
-    });   
-  }
-  // sendMail();
-  console.log(formData)
+  createPDF()
+  addNameToFile(formData.name)
+
+  res.redirect('/');
 });
 
 module.exports = router;

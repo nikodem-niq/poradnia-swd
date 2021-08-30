@@ -2,34 +2,51 @@ extends layout
 
 block content
     head 
-        script(type="text/javascript" src="../scripts/reportDate.js")
+        script(type="text/javascript" src="../scripts/dateHelper.js")
         script(type="text/javascript" src="https://momentjs.com/downloads/moment.js")
+        script(src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer")
+        script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer")
     div.container
         div.jumbotron.text-center
             #sent
                 if sent
                     h4.text-danger Informacja
-                    p.text-danger.success__raport Raport został poprawnie wygenerowany i przesłany na maila.
+                    p.text-danger.success__raport Raporty zostały poprawnie wygenerowane i przesłane na maila.
                     
             div.row
                 div.col-xl-12
                     h1.text-center.text-primary Badania Przesiewowe
             div.row
                 div.col-xl-12
+
                     h2.text-center.text-secondary Wybierz przedział wiekowy
+                    button.btn.btn-primary(type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample") Pomocnik dla dat
+                    div.collapse#collapseExample
+                        div.card.card-body
+                            input#dateInput.form-control(type='date', onInput="countAge()")
+                            p#age
                     form(action="/age6")
-                        input.buttons.btn.btn-info(value="0-6 lat" type="submit")
+                        input.btn.btn-info.btn-block(value="0-6 lat" type="submit")
                     br
                     form(action="/age7")
-                        input.buttons.btn.btn-info(value="7+ lat" type="submit")
+                        input.btn.btn-info.btn-block(value="7+ lat" type="submit")
+            div.row
+                div.col-xl-12
+                    h3.text-center.text-secondary Przebadane dzieci:
+                    h6 #{kids}
+            form(action="/send" method="POST")
+                .row
+                    .col-xl-12
+                        h4.text-primary.text-center Wyślij wszystkie raporty do
+                .row
+                        input.btn.btn-success.btn-block(type="submit" name="genreport" value="poradnia.swd.badania@gmail.com")
+                        input.btn.btn-success.btn-block(type="submit" name="genreport" value="ola.poradnia@interia.pl")
+                        input.btn.btn-success.btn-block(type="submit" name="genreport" value="judyta.poradnia@interia.pl")
+                        input.btn.btn-success.btn-block(type="submit" name="genreport" value="poradnia.pierwsza@interia.pl")
+                        input.btn.btn-success.btn-block(type="submit" name="genreport" value="poradnia.druga@interia.pl")
 
         form(action="/logout")
             input.logout.btn.btn-danger(type="submit" value="Wyloguj")
-        //.col-xl-6.restart
-            .row
-                form(action="/restart")
-                    label.text-secondary Uzywać tylko w nagłych przypadkach!
-                    input.btn.btn-danger(type="submit" value="Restart aplikacji")
                 
 
                     
