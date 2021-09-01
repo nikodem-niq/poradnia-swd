@@ -9,6 +9,7 @@ const countAge = require('./../public/scripts/reportDate');
 const pdf = require('html-pdf');
 const fs = require('fs');
 const Handlebars = require('handlebars');
+const { names } = require('debug');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -48,9 +49,34 @@ router.get('/logout', (req,res,next) => {
   }
 })
 
+router.get('/manage_kid', (req,res,next) =>{
+  if(req.cookies["userData"]){
+    if(req.query.view != null){
+      let kid = req.query.view;
+      let pdf = fs.readFileSync(`raporty/pdf/tmp/${req.cookies["userData"][1]}_tmp_dir/${slugify(kid)}.pdf`);
+      res.contentType("application/pdf");
+      res.send(pdf);
+    }
+    if(req.query.delete != null){
+      let kid = req.query.delete;
+      deleteKid(kid, req)
+      res.redirect('/');
+    }
+  }
+})
+
+const deleteKid = (kid, req) => {
+  fs.unlinkSync(`raporty/pdf/tmp/${req.cookies["userData"][1]}_tmp_dir/${slugify(kid)}.pdf`)
+  let kids = readNamesFromFile(req)
+  let newKids = kids.filter(e => e !== kid); //https://stackoverflow.com/a/44433050/10798884
+  clearFile(req)
+  addNamesToFile(newKids, req)
+}
+
 const readNamesFromFile = (req) =>{
   data = fs.readFileSync(`raporty/names${req.cookies["userData"][1]}.txt`, 'utf8')
-  names = data.toString().split('\n')
+  let names = data.toString().split('\n')
+  names.pop() // bez ostatniego elementu bo wykrywa ostatnia linijke (\n) i dodaje ją do array przez co osatni cell tabelki na report.pug jest pusty i zbugowany
   return names //imiona i nazwiska z pliku
 }
 
@@ -60,11 +86,21 @@ const addNameToFile = (name, req) => {
   });
 }
 
+const addNamesToFile = (names, req) => {
+  for(let i = 0; i < names.length; i++){
+    console.log(names[i])
+    fs.appendFileSync(`raporty/names${req.cookies["userData"][1]}.txt`, names[i] + '\n', function(err){
+      if (err) throw err;
+    });
+  }
+}
+
 const clearFile = (req) => {
   fs.writeFileSync(`raporty/names${req.cookies["userData"][1]}.txt`, '', function(err){
     if (err) throw err;
   });
 }
+
 
 const clearReportsDir = () => {
   fs.readdir('raporty/pdf/', (err,files) => {

@@ -20,7 +20,7 @@ block content
                 div.col-xl-12
 
                     h2.text-center.text-secondary Wybierz przedział wiekowy
-                    button.btn.btn-primary(type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample") Pomocnik dla dat
+                    button.btn.btn-primary.buttonmargin(type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample") Pomocnik dla dat
                     div.collapse#collapseExample
                         div.card.card-body
                             input#dateInput.form-control(type='date', onInput="countAge()")
@@ -33,7 +33,23 @@ block content
             div.row
                 div.col-xl-12
                     h3.text-center.text-secondary Przebadane dzieci:
-                    h6 #{kids}
+                    table.table
+                        thead
+                            tr.table-primary 
+                                th(scope='col') #
+                                th(scope='col') Imie i nazwisko
+                                th(scope='col') Wyświetl raport
+                                th(scope='col') Usuń raport
+                        tbody
+                            form(action='/manage_kid')
+                                each val, index in kids
+                                    tr 
+                                        th(scope='row')= index+1
+                                        td= val
+                                        td 
+                                            button.btn.btn-info(type="submit" name='view' value=val) Wyświetl
+                                        td 
+                                            button.btn.btn-danger(type="submit" name='delete' value=val) Usuń
             form(action="/send" method="POST")
                 .row
                     .col-xl-12
