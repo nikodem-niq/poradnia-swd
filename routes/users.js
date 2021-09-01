@@ -17,7 +17,8 @@ router.post('/login', function (req, res, next) {
             if (loginResult[0]) {
                 res.cookie("userData", loginResult[1]);
                 sessionStorage.setItem('user', loginResult[1]);
-                res.render('report.pug');
+               // res.render('report.pug');
+               res.redirect('/')
             } else {
                 res.render('index.pug', {
                     error: true
