@@ -1,24 +1,25 @@
 require('dotenv').config();
 
 const express = require('express');
+const sessionStorage = require('sessionstorage');
 const router = express.Router();
 const nodemailer = require('nodemailer');
 const slugify = require('slugify');
 const countAge = require('./../public/scripts/reportDate');
 const pdf = require('html-pdf');
 const fs = require('fs');
-let Handlebars = require('handlebars');
+const Handlebars = require('handlebars');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
   if(req.cookies["userData"]) {
     if(req.query.sent == 'true') {
-      res.render("report.pug", {sent:true, kids:readNamesFromFile()});
+      res.render("report.pug", {sent:true, kids:readNamesFromFile(req)});
     } else {
-      res.render("report.pug", {sent:false, kids:readNamesFromFile()});
+      res.render("report.pug", {sent:false, kids:readNamesFromFile(req)});
     }
   } else {
-    res.render('index.pug', { error: false });
+    res.render('index.pug', {error: false});
   }
 });
 
@@ -38,27 +39,29 @@ router.get('/age7', (req,res,next) => {
 
 router.get('/logout', (req,res,next) => {
   if(req.cookies["userData"]) {
+      console.log(req.cookies["userData"])
       res.clearCookie("userData");
+      sessionStorage.removeItem('user');
       res.redirect('/');
   } else {
     res.redirect('/');
   }
 })
 
-const readNamesFromFile = () =>{
-  data = fs.readFileSync('raporty/names.txt', 'utf8')
+const readNamesFromFile = (req) =>{
+  data = fs.readFileSync(`raporty/names${req.cookies["userData"][1]}.txt`, 'utf8')
   names = data.toString().split('\n')
   return names //imiona i nazwiska z pliku
 }
 
-const addNameToFile = (name) => {
-  fs.appendFileSync('raporty/names.txt', name + '\n', function(err){
+const addNameToFile = (name, req) => {
+  fs.appendFileSync(`raporty/names${req.cookies["userData"][1]}.txt`, name + '\n', function(err){
     if (err) throw err;
   });
 }
 
-const clearFile = () => {
-  fs.writeFileSync('raporty/names.txt', '', function(err){
+const clearFile = (req) => {
+  fs.writeFileSync(`raporty/names${req.cookies["userData"][1]}.txt`, '', function(err){
     if (err) throw err;
   });
 }
@@ -93,12 +96,12 @@ router.post('/send', (req,res,next) => {
   })
 
 const pdfData = () => {
-  let files = fs.readdirSync('raporty/pdf/')
+  let files = fs.readdirSync(`raporty/pdf/tmp/${req.cookies["userData"][1]}_tmp_dir/`)
   let attachments = []
   for(const file in files) {
     let pdf = {
       filename: `${slugify(files[file])}`,
-      path: `raporty/pdf/${slugify(files[file])}`,
+      path: `raporty/pdf/tmp/${req.cookies["userData"][1]}_tmp_dir/${files[file]}`,
       contentType: 'application/pdf'
     }
     attachments.push(pdf);
@@ -109,9 +112,11 @@ const pdfData = () => {
 
   const mailOptions = {
       from: process.env.SENDER_EMAIL,
-      to: req.body.genreport,
+      // to: req.body.genreport,
+      to: 'forniteskinsallegro@gmail.com',
       subject: "Badania Przesiewowe "+datetimeString,
       attachments: pdfData(),
+      text: `Załączniki wysłane z konta: ${req.cookies["userData"]}`
     };
 
   
@@ -123,26 +128,24 @@ const pdfData = () => {
         return console.log(error);
       }
 
-      fs.readdir('raporty/pdf/', (err,files) => {
+      fs.readdir(`raporty/pdf/tmp/${req.cookies["userData"][1]}_tmp_dir`, (err,files) => {
         for(const file in files) {
-          fs.unlink(`raporty/pdf/${files[file]}`, err => {
+          fs.unlink(`raporty/pdf/tmp/${req.cookies["userData"][1]}_tmp_dir/${files[file]}`, err => {
             console.log(err);
           });
         }
-        clearFile();
+        clearFile(req);
       });
     
 
       console.log('Message sent: %s', info.messageId);
       res.redirect('/')
-      //res.render("report.pug", {sent:true, kids:readNamesFromFile()});
     });   
   }
   sendMail();
 })
 
 router.post('/add_student', (req,res,next) => {
-
   let analiza = 0;
   analiza += parseInt(req.body.ana);
 
@@ -314,13 +317,15 @@ router.post('/add_student', (req,res,next) => {
   }
 
   function createPDF(){
+    let path = `raporty/pdf/tmp/${req.cookies["userData"][1]}_tmp_dir/${slugify(formData.name)}.pdf`
+
     return new Promise(resolve =>{
-        pdf.create(html, pdfOptions).toFile(`raporty/pdf/${slugify(formData.name)}.pdf`, function(err, res){resolve("resolved")});
+        pdf.create(html, pdfOptions).toFile(path, function(err, res){resolve("resolved")});
     })
   }
 
   createPDF()
-  addNameToFile(formData.name)
+  addNameToFile(formData.name, req)
 
   res.redirect('/');
 });

@@ -1,6 +1,8 @@
-var express = require('express');
-var router = express.Router();
-var login = require('../controller/authenticate/login');
+const express = require('express');
+const router = express.Router();
+const login = require('../controller/authenticate/login');
+const generateKey = require('generate-key');
+const sessionStorage = require('sessionstorage');
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
@@ -12,9 +14,9 @@ router.post('/login', function (req, res, next) {
 
         const pin = req.body.pin;
         let loginResult = login(pin);
-            if (loginResult) {
-                const PIN_Obj = {pin};
-                res.cookie("userData", PIN_Obj);
+            if (loginResult[0]) {
+                res.cookie("userData", loginResult[1]);
+                sessionStorage.setItem('user', loginResult[1]);
                 res.render('report.pug');
             } else {
                 res.render('index.pug', {
