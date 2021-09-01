@@ -8,7 +8,6 @@ const slugify = require('slugify');
 const countAge = require('./../public/scripts/reportDate');
 const pdf = require('html-pdf');
 const fs = require('fs');
-const cron = require('node-cron')
 const Handlebars = require('handlebars');
 
 /* GET home page. */
@@ -329,10 +328,5 @@ router.post('/add_student', (req,res,next) => {
 
   res.redirect('/');
 });
-
-const cron_string = '0 */6 * * *'
-cron.schedule(cron_string, () =>{
-  fs.rmdirSync('raporty/pdf/tmp/', { recursive: true })
-})
 
 module.exports = router;
