@@ -112,8 +112,7 @@ const pdfData = () => {
 
   const mailOptions = {
       from: process.env.SENDER_EMAIL,
-      // to: req.body.genreport,
-      to: 'forniteskinsallegro@gmail.com',
+      to: req.body.genreport,
       subject: "Badania Przesiewowe "+datetimeString,
       attachments: pdfData(),
       text: `Załączniki wysłane z konta: ${req.cookies["userData"]}`
