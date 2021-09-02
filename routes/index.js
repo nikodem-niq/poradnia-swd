@@ -170,14 +170,14 @@ const pdfData = () => {
         return console.log(error);
       }
 
-      fs.readdir(`raporty/pdf/tmp/${req.cookies["userData"][1]}_tmp_dir`, (err,files) => {
-        for(const file in files) {
-          fs.unlink(`raporty/pdf/tmp/${req.cookies["userData"][1]}_tmp_dir/${files[file]}`, err => {
-            console.log(err);
-          });
-        }
-        clearFile(req);
-      });
+      // fs.readdir(`raporty/pdf/tmp/${req.cookies["userData"][1]}_tmp_dir`, (err,files) => {
+      //   for(const file in files) {
+      //     fs.unlink(`raporty/pdf/tmp/${req.cookies["userData"][1]}_tmp_dir/${files[file]}`, err => {
+      //       console.log(err);
+      //     });
+      //   }
+      //   clearFile(req);
+      // });
     
 
       console.log('Message sent: %s', info.messageId);
