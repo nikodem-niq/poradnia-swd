@@ -65,6 +65,16 @@ router.get('/manage_kid', (req,res,next) =>{
   }
 })
 
+router.get('/delete_all', (req,res,next) =>{ //TODO: refractor
+  if(req.cookies["userData"]){
+      let kids = readNamesFromFile(req)
+      for(let i = 0; i < kids.length; i++){
+        deleteKid(kids[i], req)
+      }
+      res.redirect('/')
+  }
+})
+
 const deleteKid = (kid, req) => {
   fs.unlinkSync(`raporty/pdf/tmp/${req.cookies["userData"][1]}_tmp_dir/${slugify(kid)}.pdf`)
   let kids = readNamesFromFile(req)

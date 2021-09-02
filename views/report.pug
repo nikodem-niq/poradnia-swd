@@ -50,6 +50,9 @@ block content
                                             button.btn.btn-info(type="submit" name='view' value=val) Wyświetl
                                         td 
                                             button.btn.btn-danger(type="submit" name='delete' value=val) Usuń
+                    if kids.length > 0
+                        form(action="/delete_all")
+                            button.btn.btn-danger(type="submit" name="delete_all") Usuń wszystkie raporty
             form(action="/send" method="POST")
                 .row
                     .col-xl-12
