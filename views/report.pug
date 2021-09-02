@@ -47,7 +47,7 @@ block content
                                         th(scope='row')= index+1
                                         td= val
                                         td 
-                                            button.btn.btn-info(type="submit" name='view' value=val) Wyświetl
+                                            button.btn.btn-info(type="submit" formtarget='_blank' name='view' value=val) Wyświetl
                                         td 
                                             button.btn.btn-danger(type="submit" name='delete' value=val) Usuń
                     if kids.length > 0
