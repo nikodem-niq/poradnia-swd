@@ -88,10 +88,7 @@ const addNameToFile = (name, req) => {
 
 const addNamesToFile = (names, req) => {
   for(let i = 0; i < names.length; i++){
-    console.log(names[i])
-    fs.appendFileSync(`raporty/names${req.cookies["userData"][1]}.txt`, names[i] + '\n', function(err){
-      if (err) throw err;
-    });
+    addNameToFile(names[i], req)
   }
 }
 
