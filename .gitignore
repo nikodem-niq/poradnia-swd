@@ -1,3 +1,5 @@
+.DS_Store
+/raporty/.DS_Store
 .ENV
 .idea/
 node_modules/

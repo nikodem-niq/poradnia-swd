@@ -311,8 +311,11 @@ block content
                 .row
                     .col-xl-4.offset-xl-8
                         label.text-info.inlb Suma:
-                        input(class="form-control inlb" id="sum" name="pf" type="number" readonly required)
-                        h6#wynikFigury Wynik: niski
+                        input(class="form-control inlb" id="sum" name="pf" type="number" min="0" max="80"  required)
+                        h5#wynikFigury Wynik: niski
+                        h6 Zakres: <48: niski 
+                        h6 Zakres: >48 i <66: przeciętny 
+                        h6 Zakres: >66: wysoki 
                 .row
                     .col-xl-12
                         h4.text-primary.text-center Uwagi

@@ -9,7 +9,7 @@ function countPoints(){
     let podsumaD = document.getElementById("podsumaD")
     let suma = document.getElementById("sum")
     let p = document.getElementById("wynikFigury")
-    
+
     let ASum = 0;
     let BSum = 0;
     let CSum = 0;
