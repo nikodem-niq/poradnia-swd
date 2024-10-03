@@ -3,8 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build": "node ./bin/www",
-    "start": "node ./bin/www"
+    "start": "node ./app.js"
   },
   "dependencies": {
     "alert-node": "^2.0.0",
