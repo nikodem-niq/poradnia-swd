@@ -1,12 +1,14 @@
 {
-  "name": "expressmusic",
+  "name": "poradnia-swd-bezpieczny-rejs",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www"
+    "build": "node ./bin/www",
+    "start": "node ./bin/www"
   },
   "dependencies": {
     "alert-node": "^2.0.0",
+    "body-parser": "^1.20.2",
     "consolidate": "^0.15.1",
     "cookie-parser": "^1.4.4",
     "debug": "^2.6.9",
