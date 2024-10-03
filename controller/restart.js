@@ -1,6 +1,6 @@
 const { exec } = require('child_process');
 //const forever = require('forever');
-
+console.log('test')
 const restartController = (req,res,next) => {
     if(req.cookies["userData"]) {
         exec('', (error, stdout, stderr) => {
