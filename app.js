@@ -10,6 +10,7 @@ const exphbs = require('express-handlebars')
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+require('dotenv').config();
 
 var app = express();
 
@@ -54,5 +55,10 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);  
   res.render('error.pug');
 });
+
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+  console.log(`listening on ${port}`)
+})
 
 module.exports = app;
