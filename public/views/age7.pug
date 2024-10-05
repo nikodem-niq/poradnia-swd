@@ -6,7 +6,7 @@ block content
         script(type="text/javascript" src="https://momentjs.com/downloads/moment.js")
         script(type="text/javascript" src="../scripts/age7.js")
     div.container
-        form(action="/add_student" method="POST")
+        form(action="/students/add" method="POST")
             div.jumbotron
                 div.row
                     div.col-xl-12
@@ -346,7 +346,7 @@ block content
                         input.btn.btn-success.btn-block(type="submit" value="Dodaj ucznia do listy")
         form(action="/")
             input.back.btn.btn-danger(type="submit" value="Wstecz")
-        form(action="/logout")
+        form(action="/auth/logout")
             input.logout.btn.btn-danger(type="submit" value="Wyloguj")
                 
 

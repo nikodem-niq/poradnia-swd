@@ -2,10 +2,13 @@
   "name": "poradnia-swd-bezpieczny-rejs",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "start": "node ./app.js"
   },
   "dependencies": {
+    "@vercel/blob": "^0.24.1",
+    "@vercel/postgres": "^0.10.0",
     "alert-node": "^2.0.0",
     "body-parser": "^1.20.2",
     "consolidate": "^0.15.1",
@@ -27,7 +30,9 @@
     "nodemailer": "^6.3.0",
     "nodemailer-express-handlebars": "^3.1.0",
     "nodemon": "^1.19.1",
-    "pug": "^2.0.0-beta11",
+    "pg": "^8.13.0",
+    "pug": "^3.0.2",
+    "puppeteer": "^23.5.0",
     "sessionstorage": "^0.1.0",
     "slugify": "^1.6.0"
   }

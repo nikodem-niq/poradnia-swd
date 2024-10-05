@@ -37,22 +37,22 @@ block content
                         thead
                             tr.table-primary 
                                 th(scope='col') #
-                                th(scope='col') Imie i nazwisko
+                                th(scope='col') Nazwa pliku
                                 th(scope='col') Wyświetl raport
                                 th(scope='col') Usuń raport
                         tbody
-                            form(action='/manage_kid')
-                                each val, index in kids
-                                    tr 
-                                        th(scope='row')= index+1
-                                        td= val
-                                        td 
-                                            button.btn.btn-info(type="submit" formtarget='_blank' name='view' value=val) Wyświetl
-                                        td 
-                                            button.btn.btn-danger(type="submit" name='delete' value=val) Usuń
+                            each val, index in kids
+                                tr 
+                                    th(scope='row')= index+1
+                                    td= val.name
+                                    td 
+                                        a(href=val.url target="_blank") Wyświetl
+                                    td 
+                                        form(action='/students/delete')
+                                            button.btn.btn-danger(type="submit" name='delete' value=val.url) Usuń
                     if kids.length > 0
-                        form(action="/delete_all")
-                            button.btn.btn-danger(type="submit" name="delete_all") Usuń wszystkie raporty
+                        form(action="/students/delete-all")
+                            button.btn.btn-danger(type="submit" name="delete-all") Usuń wszystkie raporty
             form(action="/send" method="POST")
                 .row
                     .col-xl-12
@@ -66,9 +66,9 @@ block content
                         input.btn.btn-success.btn-block(type="submit" name="genreport" value="akrzyzak@poradnia.wodzislaw.pl")
                         input.btn.btn-success.btn-block(type="submit" name="genreport" value="kbrzezinka@poradnia.wodzislaw.pl")
                         input.btn.btn-success.btn-block(type="submit" name="genreport" value="awujka@poradnia.wodzislaw.pl")
-                        //- input.btn.btn-success.btn-block(type="submit" name="genreport" value="nikodem.zychma@gmail.com")
+                        input.btn.btn-success.btn-block(type="submit" name="genreport" value="nikodem.zychma@gmail.com")
 
-        form(action="/logout")
+        form(action="/auth/logout")
             input.logout.btn.btn-danger(type="submit" value="Wyloguj")
                 
 

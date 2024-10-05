@@ -1,6 +1,10 @@
 .DS_Store
 /raporty/.DS_Store
+/raporty/pdf/tmp/*
 .ENV
+.env
+.env.local
 .idea/
 node_modules/
 package-lock.json
+.vercel
