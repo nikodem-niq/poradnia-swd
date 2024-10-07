@@ -9,12 +9,8 @@ export const generateFile = async (formData, userId) => {
     const html = template({formData});
 
     const extension = 'html'
-    const fileName = `/tmp/${formData.name}_${userId}.${extension}`;
 
-    await fs.writeFile(fileName, html);
-    const file = await fs.readFile(path.join(process.cwd(), fileName), "utf8");
-    await addFile(formData.name, userId, file, extension);
-    await fs.rm(fileName)
+    await addFile(formData.name, userId, html, extension);
 
   } catch (error) {
     console.error('Error in generatePdf:', error);
