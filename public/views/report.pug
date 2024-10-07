@@ -46,7 +46,7 @@ block content
                                     th(scope='row')= index+1
                                     td= val.name
                                     td 
-                                        a(href=val.url target="_blank") Pobierz
+                                        a(href=val.archiveUrl target="_blank") Pobierz
                                     td 
                                         form(action='/students/delete')
                                             button.btn.btn-danger(type="submit" name='delete' value=val.url) Usuń

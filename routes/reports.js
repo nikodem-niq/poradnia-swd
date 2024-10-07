@@ -6,19 +6,14 @@ import { format } from 'date-fns';
 const router = express.Router();
 
 const mapKidsAndArchiveArrays = (kids, archive) => {
-  const archiveMap = new Map();
-  archive.forEach(item => {
-    archiveMap.set(item.name, item.url);
-  });
-
-  const combinedArray = kids
-    .filter(kid => archiveMap.has(kid.name))
-    .map(kid => ({
-      name: kid.name,
-      url: archiveMap.get(kid.name)
-    }));
-
-    return combinedArray;
+  const parsedArchive = archive.map(item => {
+    return {
+      name: item.name,
+      archiveUrl: item.url
+    }
+  })
+  const array = kids.map((item, i) => Object.assign({}, item, parsedArchive[i]));
+  return array;
 }
 
 router.get('/', async (req, res, next) => {
@@ -111,7 +106,7 @@ router.post('/send', async (req, res) => {
                         return `
                         <tr>
                             <td>${kid.name}</td>
-                            <td><a href="${kid.url}" target="_blank">${kid.url}</a></td>
+                            <td><a href="${kid.archiveUrl}" target="_blank">${kid.archiveUrl}</a></td>
                         </tr>
                         `;
                     }).join('')}
