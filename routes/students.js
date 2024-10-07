@@ -11,7 +11,7 @@ router.post('/add', async (req, res) => {
         if(req.cookies["userData"]) {
           const userId = req.cookies["userData"][1];
           const formData = processFormData(req.body);
-          await generateFile(formData, userId);
+          await generateFile({...formData, ogEmail: 'ppp-wodzislaw@wp.pl'}, userId);
           res.redirect('/');
         } else {
           res.redirect('/');
