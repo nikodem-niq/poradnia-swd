@@ -32,10 +32,7 @@ block content
                             option(value="Nieustalona") Nieustalona                                                        
 
                 div.row
-                    div.col-xl-12
-                        //- h6.text-center.text-info Aktualnie badane dziecko: #{name}.
-                        //- input( type="hidden" name="name" value=name)  
-                        //- input( type="hidden" name="lat" value=lat)     
+                    div.col-xl-12  
                         input( type="hidden" name="age" value="age7")                                                                                                                                     
                 div.row
                     div.col-xl-12
@@ -49,37 +46,13 @@ block content
                     div.col-xl-6
                         h5.text-secondary.text-center Analiza
                         p.half(id="an1") NOS
-                        //- select.form-control.half(name="an1" onChange="countAnaliza()")
-                        //-     option(value="1") dobrze
-                        //-     option(value="0") źle
                         p.half(id="an2") KAWA
-                        //- select.form-control.half(name="an2" onChange="countAnaliza()")
-                        //-     option(value="1") dobrze
-                        //-     option(value="0") źle
                         p.half(id="an3") KOTEK
-                        //- select.form-control.half(name="an3" onChange="countAnaliza()")
-                        //-     option(value="1") dobrze
-                        //-     option(value="0") źle
                         p.half(id="an4") BALON
-                        //- select.form-control.half(name="an4" onChange="countAnaliza()")
-                        //-     option(value="1") dobrze
-                        //-     option(value="0") źle
                         p.half(id="an5") FASOLA
-                        //- select.form-control.half(name="an5" onChange="countAnaliza()")
-                        //-     option(value="1") dobrze
-                        //-     option(value="0") źle
                         p.half(id="an6") BARANEK
-                        //- select.form-control.half(name="an6" onChange="countAnaliza()")
-                        //-     option(value="1") dobrze
-                        //-     option(value="0") źle
                         p.half(id="an7") KARTKA
-                        //- select.form-control.half(name="an7" onChange="countAnaliza()")
-                        //-     option(value="1") dobrze
-                        //-     option(value="0") źle
                         p.half(id="an8") KOSTKA
-                        //- select.form-control.half(name="an8" onChange="countAnaliza()")
-                        //-     option(value="1") dobrze
-                        //-     option(value="0") źle
                         select.form-control.half(name="ana" onchange="countAnaliza()")
                             option(value="0") 0
                             option(value="1") 1
@@ -94,37 +67,13 @@ block content
                     div.col-xl-6
                         h5.text-secondary.text-center Synteza
                         p.half(id="sy1") M-U-R
-                        //- select.form-control.half(name="sy1" onchange="countSynteza()")
-                        //-     option(value="1") dobrze
-                        //-     option(value="0") źle
                         p.half(id="sy2") N-O-G-A
-                        //- select.form-control.half(name="sy2" onchange="countSynteza()")
-                        //-     option(value="1") dobrze
-                        //-     option(value="0") źle
                         p.half(id="sy3") K-R-O-W-A
-                        //- select.form-control.half(name="sy3" onchange="countSynteza()")
-                        //-     option(value="1") dobrze
-                        //-     option(value="0") źle
                         p.half(id="sy4") D-R-O-G-A
-                        //- select.form-control.half(name="sy4" onchange="countSynteza()")
-                        //-     option(value="1") dobrze
-                        //-     option(value="0") źle
                         p.half(id="sy5") Z-E-G-A-R-Y
-                        //- select.form-control.half(name="sy5" onchange="countSynteza()")
-                        //-     option(value="1") dobrze
-                        //-     option(value="0") źle
                         p.half(id="sy6") K-O-R-O-N-A
-                        //- select.form-control.half(name="sy6" onchange="countSynteza()")
-                        //-     option(value="1") dobrze
-                        //-     option(value="0") źle
                         p.half(id="sy7") K-R-E-S-K-A
-                        //- select.form-control.half(name="sy7" onchange="countSynteza()")
-                        //-     option(value="1") dobrze
-                        //-     option(value="0") źle
                         p.half(id="sy8") K-R-O-M-K-A
-                        //- select.form-control.half(name="sy8" onchange="countSynteza()")
-                        //-     option(value="1") dobrze
-                        //-     option(value="0") źle
                         select.form-control.half(name="syn" onchange="countSynteza()")
                             option(value="0") 0
                             option(value="1") 1
@@ -143,29 +92,8 @@ block content
                     .col-xl-12.toAppend
                         p.half Zestaw 1: pon, moleno, atka
                         p.half Zestaw 2: pamolar, polke, szadapak, karza
-                        //- select#zestaw2.form-control.half(name="zestaw2" onchange="countPamiecSluchowa()")
-                        //-     option(value="0") 0 pkt
-                        //-     option(value="1") 1 pkt
-                        //-     option(value="2") 2 pkt
-                        //-     option(value="3") 3 pkt
-                        //-     option(value="4") 4 pkt
-                        p.half Zestaw 3: son, botem, keczolat, obyrek, kampa
-                        //- select#zestaw3.form-control.half(name="zestaw3" onchange="countPamiecSluchowa()")
-                        //-     option(value="0") 0 pkt
-                        //-     option(value="1") 1 pkt
-                        //-     option(value="2") 2 pkt
-                        //-     option(value="3") 3 pkt
-                        //-     option(value="4") 4 pkt                            
-                        //-     option(value="5") 5 pkt                            
+                        p.half Zestaw 3: son, botem, keczolat, obyrek, kampa                          
                         p.half Zestaw 4: bem, fata, buzany, dera, bukerek, zora
-                        //- select#zestaw4.form-control.half(name="zestaw4" onchange="countPamiecSluchowa()")
-                        //-     option(value="0") 0 pkt
-                        //-     option(value="1") 1 pkt
-                        //-     option(value="2") 2 pkt
-                        //-     option(value="3") 3 pkt
-                        //-     option(value="4") 4 pkt
-                        //-     option(value="5") 5 pkt
-                        //-     option(value="6") 6 pkt 
                         select#zestaw1.form-control(name="zestaw1")
                             option(value="-1") Nie ustalona
                             option(value="0") 0 pkt
@@ -186,12 +114,7 @@ block content
                             option(value="15") 15 pkt
                             option(value="16") 16 pkt
                             option(value="17") 17 pkt
-                            option(value="18") 18 pkt
-                //- .row
-                //-     .col-xl-4.offset-xl-8
-                //-         label.text-info.inlb Suma:
-                //-         input(class="form-control inlb" id="sumPamiecSluchowa" type="number" readonly)
-                                                                                                   
+                            option(value="18") 18 pkt                                                                         
                 .row
                     .col-xl-12
                         h4.text-primary.text-center Artykulacja głosek

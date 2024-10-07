@@ -1,31 +1,21 @@
 import Handlebars from 'handlebars';
-import fs from 'fs';
+import fs from 'fs/promises';
 import path from 'path';
-import pdf from 'html-pdf';
-
-export const generatePdf = async (formData) => {
+import { addFile } from '../db/blob.js';
+export const generateFile = async (formData, userId) => {
   try {
-    const source = fs.readFileSync(path.join(process.cwd(), "/public/views/email/emailTemplate.hbs"), "utf8");
+    const source = await fs.readFile(path.join(process.cwd(), "/public/views/email/emailTemplate.hbs"), "utf8");
     const template = Handlebars.compile(source);
     const html = template({formData});
 
-    const pdfOptions = {
-      "format": "A4",
-      "orientation": "landscape",
-      "border" : "0px"
-    }
+    const extension = 'html'
+    const fileName = `/tmp/${formData.name}_${userId}.${extension}`;
 
-    const pdfBuffer = new Promise((resolve, reject) => {
-      pdf.create(html, pdfOptions).toBuffer((err, buffer) => {
-        if(err) reject();
-        resolve(buffer);
-      })
-    })
-    const pdfFile = await pdfBuffer;
+    await fs.writeFile(fileName, html);
+    const file = await fs.readFile(path.join(process.cwd(), fileName), "utf8");
+    await addFile(formData.name, userId, file, extension);
+    await fs.rm(fileName)
 
-    console.log('PDF generated successfully. Buffer length:', pdfBuffer.length);
-    
-    return pdfFile;
   } catch (error) {
     console.error('Error in generatePdf:', error);
     throw error;

@@ -43,14 +43,6 @@ function countAnaliza(){
 }
 
 function countSynteza(){
-    // let sy1 = parseInt(document.getElementsByName("sy1")[0].value)
-    // let sy2 = parseInt(document.getElementsByName("sy2")[0].value)
-    // let sy3 = parseInt(document.getElementsByName("sy3")[0].value)
-    // let sy4 = parseInt(document.getElementsByName("sy4")[0].value)
-    // let sy5 = parseInt(document.getElementsByName("sy5")[0].value)
-    // let sy6 = parseInt(document.getElementsByName("sy6")[0].value)
-    // let sy7 = parseInt(document.getElementsByName("sy7")[0].value)
-    // let sy8 = parseInt(document.getElementsByName("sy8")[0].value)
     let p = document.getElementById("wynikSynteza");
     let synteza = parseInt(document.getElementsByName("syn")[0].value);
     let _synteza = "";

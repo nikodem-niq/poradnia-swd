@@ -55,7 +55,7 @@ function countAnaliza(){
       else if(analiza >= 7) {
         _analiza = "przeciętny";
       } 
-      else if(analiza == -1) { // brak zakresu wysokiego dla 7 latkow
+      else if(analiza == -1) {
         _analiza = "wysoki"
       }
       p.innerHTML = "Wynik: " + _analiza
@@ -71,7 +71,7 @@ function countSynteza(){
       else if( synteza >= 7) {
         _synteza = "przeciętny";
       } 
-      else if(synteza == -1) { // brak zakresu wysokiego dla 7 latkow
+      else if(synteza == -1) {
         _synteza = "wysoki"
       }
       p.innerHTML = "Wynik: " + _synteza

@@ -2,8 +2,6 @@ extends layout
 
 block content
     head 
-        //script(type="text/javascript" src="../scripts/reportDate.js")
-        //script(type="text/javascript" src="https://momentjs.com/downloads/moment.js")
         script(type="text/javascript" src="../scripts/age6.js")
     div.container
         form(action="/students/add" method="POST")
@@ -23,8 +21,6 @@ block content
                         input(name="date" id="dateInput" required class=inputDateClasses type="text" placeholder="YYYY-MM-DD" onChange="countAge()")
                 div.row
                     div.col-xl-12
-                        //- h6.text-center.text-info Aktualnie badane dziecko: #{name}.
-                        //- input(type="hidden" name="name" value=name)
                         input( type="hidden" name="age" value="age6")           
                 div.row
                     div.col-xl-12
@@ -41,42 +37,17 @@ block content
                 div.row
                     div.col-xl-12
                         p.text-center.text-danger(id="age") Wiek: #{date}
-                        //- input(type="hidden" name="date" value=date)                       
                 div.row
                     div.col-xl-6
                         h5.text-secondary.text-center Analiza
                         p.half(id="an1") NOS
-                        //- select.form-control.half(name="an1" onchange="countAnaliza()")
-                        //-     option(value="1") dobrze
-                        //-     option(value="0") źle
                         p.half(id="an2") KAWA
-                        //- select.form-control.half(name="an2" onchange="countAnaliza()")
-                        //-     option(value="1") dobrze
-                        //-     option(value="0") źle
                         p.half(id="an3") KOTEK
-                        //- select.form-control.half(name="an3" onchange="countAnaliza()")
-                        //-     option(value="1") dobrze
-                        //-     option(value="0") źle
                         p.half(id="an4") BALON
-                        //- select.form-control.half(name="an4" onchange="countAnaliza()")
-                        //-     option(value="1") dobrze
-                        //-     option(value="0") źle
                         p.half(id="an5") FASOLA
-                        //- select.form-control.half(name="an5" onchange="countAnaliza()")
-                        //-     option(value="1") dobrze
-                        //-     option(value="0") źle
                         p.half(id="an6") BARANEK
-                        //- select.form-control.half(name="an6" onchange="countAnaliza()")
-                        //-     option(value="1") dobrze
-                        //-     option(value="0") źle
                         p.half(id="an7") KARTKA
-                        //- select.form-control.half(name="an7" onchange="countAnaliza()")
-                        //-     option(value="1") dobrze
-                        //-     option(value="0") źle
                         p.half(id="an8") KOSTKA
-                        //- select.form-control.half(name="an8" onchange="countAnaliza()")
-                        //-     option(value="1") dobrze
-                        //-     option(value="0") źle
                         select.form-control.half(name="ana" onchange="countAnaliza()")
                             option(value="0") 0
                             option(value="1") 1
@@ -91,37 +62,13 @@ block content
                     div.col-xl-6
                         h5.text-secondary.text-center Synteza
                         p.half(id="sy1") M-U-R
-                        //- select.form-control.half(name="sy1" onchange="countSynteza()")
-                        //-     option(value="1") dobrze
-                        //-     option(value="0") źle
                         p.half(id="sy2") N-O-G-A
-                        //- select.form-control.half(name="sy2" onchange="countSynteza()")
-                        //-     option(value="1") dobrze
-                        //-     option(value="0") źle
                         p.half(id="sy3") K-R-O-W-A
-                        //- select.form-control.half(name="sy3" onchange="countSynteza()")
-                        //-     option(value="1") dobrze
-                        //-     option(value="0") źle
                         p.half(id="sy4") D-R-O-G-A
-                        //- select.form-control.half(name="sy4" onchange="countSynteza()")
-                        //-     option(value="1") dobrze
-                        //-     option(value="0") źle
                         p.half(id="sy5") Z-E-G-A-R-Y
-                        //- select.form-control.half(name="sy5" onchange="countSynteza()")
-                        //-     option(value="1") dobrze
-                        //-     option(value="0") źle
                         p.half(id="sy6") K-O-R-O-N-A
-                        //- select.form-control.half(name="sy6" onchange="countSynteza()")
-                        //-     option(value="1") dobrze
-                        //-     option(value="0") źle
                         p.half(id="sy7") K-R-E-S-K-A
-                        //- select.form-control.half(name="sy7" onchange="countSynteza()")
-                        //-     option(value="1") dobrze
-                        //-     option(value="0") źle
                         p.half(id="sy8") K-R-O-M-K-A
-                        //- select.form-control.half(name="sy8" onchange="countSynteza()")
-                        //-     option(value="1") dobrze
-                        //-     option(value="0") źle
                         select.form-control.half(name="syn" onchange="countSynteza()")
                             option(value="0") 0
                             option(value="1") 1

@@ -1,7 +1,7 @@
 import express from 'express';
-import { generatePdf } from '../services/pdf.js';
+import { generateFile } from '../services/pdf.js';
 import { countAge } from '../services/ageCalculator.js';
-import { addPdf, delAllPdfsByUserId, delPdfByUrl } from '../db/blob.js';
+import { delAllFilesByUserId, delFileByUrl } from '../db/blob.js';
 
 const router = express.Router();
 
@@ -11,8 +11,7 @@ router.post('/add', async (req, res) => {
         if(req.cookies["userData"]) {
           const userId = req.cookies["userData"][1];
           const formData = processFormData(req.body);
-          const pdfBuffer = await generatePdf(formData);
-          await addPdf(formData.name, userId, pdfBuffer)
+          await generateFile(formData, userId);
           res.redirect('/');
         } else {
           res.redirect('/');
@@ -25,7 +24,7 @@ router.post('/add', async (req, res) => {
 
 router.get('/delete', async (req, res) => {
   if(req.cookies["userData"]) {
-    await delPdfByUrl(req.query.delete);
+    await delFileByUrl(req.query.delete);
     res.redirect('/');
   } else {
     res.redirect('/');
@@ -35,7 +34,7 @@ router.get('/delete', async (req, res) => {
 router.get('/delete-all', async (req, res) => {
   if(req.cookies["userData"]) {
     const userId = req.cookies["userData"][1];
-    await delAllPdfsByUserId(userId)
+    await delAllFilesByUserId(userId)
     res.redirect('/');
   } else {
     res.redirect('/');
@@ -66,7 +65,6 @@ function processFormData(body) {
     let _pamiecSluchowa;
     
     let years = countAge(age)[0]
-    console.log(years)
 
     if(years < 7){
       if(analiza < 1) {

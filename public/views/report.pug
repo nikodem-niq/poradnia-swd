@@ -38,7 +38,7 @@ block content
                             tr.table-primary 
                                 th(scope='col') #
                                 th(scope='col') Nazwa pliku
-                                th(scope='col') Wyświetl raport
+                                th(scope='col') Pobierz raport
                                 th(scope='col') Usuń raport
                         tbody
                             each val, index in kids
@@ -46,7 +46,7 @@ block content
                                     th(scope='row')= index+1
                                     td= val.name
                                     td 
-                                        a(href=val.url target="_blank") Wyświetl
+                                        a(href=val.url target="_blank") Pobierz
                                     td 
                                         form(action='/students/delete')
                                             button.btn.btn-danger(type="submit" name='delete' value=val.url) Usuń

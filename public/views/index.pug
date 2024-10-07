@@ -11,10 +11,8 @@ block content
             - var h1Classes = ['h3', 'mb-3', 'font-weight-normal']
             h1(class=h1Classes) Wpisz swój PIN
 
-            //-input pin
             label( for="inputPIN" class="sr-only") PIN
             input(type="password" name="pin" id="inputPIN" class="form-control" placeholder="PIN.." required autofocus)
             
-            //-signIn button
             - var buttonClass=['btn', 'btn-lg', 'btn-success', 'btn-block'];
             button(class=buttonClass type="submit") Zaloguj się

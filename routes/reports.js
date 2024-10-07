@@ -1,6 +1,6 @@
 import express from 'express';
 import { sendReport } from '../services/email.js';
-import { getPdfsForUser } from '../db/blob.js';
+import { getFilesForUser } from '../db/blob.js';
 
 const router = express.Router();
 
@@ -8,7 +8,7 @@ router.get('/', async (req, res, next) => {
     try {
         if(req.cookies["userData"]) {
           const userId = req.cookies["userData"][1];
-          const kids = await getPdfsForUser(userId);
+          const kids = await getFilesForUser(userId);
           return res.render("report.pug", {sent: !!req.query.sent, kids});
         } else {
           return res.render('index.pug', {error: false});
@@ -22,8 +22,7 @@ router.post('/send', async (req, res) => {
   if(req.cookies["userData"]) {
     const userId = req.cookies["userData"][1];
     const email = req.body.genreport;
-    const kids = await getPdfsForUser(userId);
-    console.log(kids)
+    const kids = await getFilesForUser(userId);
     const html = 
     `Załączniki wysłane z konta: ${userId} <br /> 
     ${kids.map(kid => {
