@@ -49,7 +49,7 @@ block content
                                         a(href=val.archiveUrl target="_blank") Pobierz
                                     td 
                                         form(action='/students/delete')
-                                            button.btn.btn-danger(type="submit" name='delete' value=val.url) Usuń
+                                            button.btn.btn-danger(type="submit" name='delete' value=val.kidUrl) Usuń
                     if kids.length > 0
                         form(action="/students/delete-all")
                             button.btn.btn-danger(type="submit" name="delete-all") Usuń wszystkie raporty
